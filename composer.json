@@ -1,0 +1,19 @@
+{
+    "name": "secture/sudoku",
+    "description": "Project for pairing interviews",
+    "type": "project",
+    "require-dev": {
+        "phpunit/phpunit": "10.0.x-dev"
+    },
+    "autoload": {
+        "psr-4": {"Secture\\Sudoku\\": "src/"}
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Miguel Ángel Sánchez Chordi",
+            "email": "mangel.snc@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
