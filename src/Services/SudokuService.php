@@ -52,10 +52,10 @@ class SudokuService
     /* Fill the cell with the possiblities values or the correct value */
     public function completeCell(array $board, int $rowPosition, int $columnPosition)
     {
-        /* Retrive all the values used on the row, column and square */
+        /* Retrive all the values used on the row, column and square in base one cell */
         $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
 
-        /* Create an array with the possible values */
+        /* Create an array with the possible values for the cell*/
         $possibilitiesValues = [];
         for ($thePosibilityValue = 1; $thePosibilityValue <= 9; $thePosibilityValue++) {
             if (!in_array($thePosibilityValue, $usedValues)) {
@@ -69,7 +69,7 @@ class SudokuService
 
             return true;
         } else {
-            /* Else fill it with all the possible values */
+            /* Else fill it with all the possible values for the cell*/
             $board[$rowPosition][$columnPosition] = $possibilitiesValues;
 
             return false;
