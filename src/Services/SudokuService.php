@@ -151,4 +151,22 @@ class SudokuService
 
         return $value;
     }
+
+    public function printBoard(array $board): string
+    {
+        $template = "";
+        for ($i = 0; $i < 9; $i++) {
+            $rowCells = $this->getRow($board, $i);
+            if ($i % 3 == 0) $template .= "|=======|=======|=======|<br>";
+            $template .= "|" .
+                $this->printCell($rowCells[0]) . $this->printCell($rowCells[1]) .  $this->printCell($rowCells[2]) .  "|" .
+                $this->printCell($rowCells[3]) . $this->printCell($rowCells[4]) .  $this->printCell($rowCells[5]) .  "|" .
+                $this->printCell($rowCells[6]) . $this->printCell($rowCells[7]) .  $this->printCell($rowCells[8]) . "|<br>";
+        }
+
+        $template .= "|=======|=======|=======|<br>";
+
+        return $template;
+    }
+
 }
