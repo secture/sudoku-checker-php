@@ -84,4 +84,26 @@ class SudokuService
 
         return ($expected === $usedValues) ? 'true' : 'false';
     }
+
+    private function isSolved(array $board)
+    {
+        $valid = true;
+
+        // Check all rows
+        for ($rowPosition = 0; $rowPosition < 9 && $valid == true; $rowPosition++) {
+            $valid = $this->checkSection($this->getRow($board, $rowPosition)) ? true : false;
+        }
+
+        // Check all columns
+        for ($columnPosition = 0; $columnPosition < 9 && $valid == true; $columnPosition++) {
+            $valid = $this->checkSection($this->getColumn($board, $columnPosition)) ? true : false;
+        }
+
+        // Check all square
+        for ($squarePosition = 1; $squarePosition < 9 && $valid == true; $squarePosition++) {
+            $valid = $this->checkSection($this->getSquare($board, $squarePosition)) ? true : false;
+        }
+
+        return $valid;
+    }
 }
