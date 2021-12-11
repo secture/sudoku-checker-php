@@ -33,5 +33,19 @@ class SudokuService
 
         return $columnCells;
     }
+
+    /* Given a board and square position, we iterate the row and colums to return the cells of the square */
+    public function getSquare($board, $squarePosition)
+    {
+        $cellsOfSquare = [];
+        for ($row = 0; $row < 9; $row++) {
+            for ($column = 0; $column < 9; $column++) {
+                if ($squarePosition == $this->squareCoordinates[$row][$column]) {
+                    array_push($cellsOfSquare, $board[$row][$column]);
+                }
+            }
+        }
+
+        return $cellsOfSquare;
     }
 }
