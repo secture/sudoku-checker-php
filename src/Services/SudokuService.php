@@ -17,13 +17,13 @@ class SudokuService
         [7, 7, 7, 8, 8, 8, 9, 9, 9]
     ];
 
-    public function getRow(array $board, int $rowPosition)
+    private function getRow(array $board, int $rowPosition)
     {
         return $board[$rowPosition];
     }
 
     /* Given a board and column position, we iterate the rows to return a column */
-    public function getColumn(array $board, int $columnPosition)
+    private function getColumn(array $board, int $columnPosition)
     {
 
         $columnCells = [];
@@ -35,7 +35,7 @@ class SudokuService
     }
 
     /* Given a board and square position, we iterate the row and colums to return the cells of the square */
-    public function getSquare(array $board, int $squarePosition)
+    private function getSquare(array $board, int $squarePosition)
     {
         $cellsOfSquare = [];
         for ($row = 0; $row < 9; $row++) {
@@ -50,7 +50,7 @@ class SudokuService
     }
 
     /* Fill the cell with the possiblities values or the correct value */
-    public function completeCell(array $board, int $rowPosition, int $columnPosition)
+    private function completeCell(array $board, int $rowPosition, int $columnPosition)
     {
         /* Retrive all the values used on the row, column and square in base one cell */
         $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
@@ -77,7 +77,7 @@ class SudokuService
     }
 
     /* Given an array of used values in row/column/square check if the is correct complete */
-    public function checkSection(array $usedValues)
+    private function checkSection(array $usedValues)
     {
         $expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         sort($usedValues);
