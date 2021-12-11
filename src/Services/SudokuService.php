@@ -5,7 +5,7 @@ namespace Secture\Service;
 class SudokuService
 {
     /* Define the diferents square positions */
-    private $squareCoordinates = [
+    private array $squareCoordinates = [
         [1, 1, 1, 2, 2, 2, 3, 3, 3],
         [1, 1, 1, 2, 2, 2, 3, 3, 3],
         [1, 1, 1, 2, 2, 2, 3, 3, 3],
@@ -17,13 +17,13 @@ class SudokuService
         [7, 7, 7, 8, 8, 8, 9, 9, 9]
     ];
 
-    public function getRow($board, $rowPosition)
+    public function getRow(array $board, int $rowPosition)
     {
         return $board[$rowPosition];
     }
 
     /* Given a board and column position, we iterate the rows to return a column */
-    public function getColumn($board, $columnPosition)
+    public function getColumn(array $board, int $columnPosition)
     {
 
         $columnCells = [];
@@ -35,7 +35,7 @@ class SudokuService
     }
 
     /* Given a board and square position, we iterate the row and colums to return the cells of the square */
-    public function getSquare($board, $squarePosition)
+    public function getSquare(array $board, int $squarePosition)
     {
         $cellsOfSquare = [];
         for ($row = 0; $row < 9; $row++) {
@@ -50,7 +50,7 @@ class SudokuService
     }
 
     /* Fill the cell with the possiblities values or the correct value */
-    public function completeCell($board, $rowPosition, $columnPosition)
+    public function completeCell(array $board, int $rowPosition, int $columnPosition)
     {
         /* Retrive all the values used on the row, column and square */
         $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
