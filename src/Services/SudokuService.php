@@ -48,4 +48,31 @@ class SudokuService
 
         return $cellsOfSquare;
     }
+
+    /* Fill the cell with the possiblities values or the correct value */
+    public function completeCell($board, $rowPosition, $columnPosition)
+    {
+        /* Retrive all the values used on the row, column and square */
+        $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
+
+        /* Create an array with the possible values */
+        $possibilitiesValues = [];
+        for ($thePosibilityValue = 1; $thePosibilityValue <= 9; $thePosibilityValue++) {
+            if (!in_array($thePosibilityValue, $usedValues)) {
+                array_push($possibilitiesValues, $thePosibilityValue);
+            }
+        }
+
+        if (count($possibilitiesValues) == 1) {
+            /*  If there is only one valid possibility, fill it in */
+            $board[$rowPosition][$columnPosition] = $possibilitiesValues[0];
+
+            return true;
+        } else {
+            /* Else fill it with all the possible values */
+            $board[$rowPosition][$columnPosition] = $possibilitiesValues;
+
+            return false;
+        }
+    }
 }
