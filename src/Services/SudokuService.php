@@ -169,4 +169,11 @@ class SudokuService
         return $template;
     }
 
+    public function resolve(array $board): array
+    {
+        $board = $this->backtrackBased($board);
+        $this->isSolved($board);
+
+        return $board;
+    }
 }
