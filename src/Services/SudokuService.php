@@ -75,4 +75,13 @@ class SudokuService
             return false;
         }
     }
+
+    /* Given an array of used values in row/column/square check if the is correct complete */
+    public function checkSection(array $usedValues)
+    {
+        $expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        sort($usedValues);
+
+        return ($expected === $usedValues) ? 'true' : 'false';
+    }
 }
