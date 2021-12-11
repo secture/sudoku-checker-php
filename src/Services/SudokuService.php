@@ -144,4 +144,11 @@ class SudokuService
         return false;
     }
 
+    private function printCell(mixed $value)
+    {
+        //If cell is not resolve return a dot.
+        if (is_array($value) | $value == 0) return ".";
+
+        return $value;
+    }
 }
