@@ -2,6 +2,12 @@
 
 namespace Secture\Service;
 
-class SudokuService {
+class SudokuService
+{
+    public function getRow($board, $rowPosition)
+    {
+        return $board[$rowPosition];
+    }
 
+    }
 }
