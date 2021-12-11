@@ -106,4 +106,42 @@ class SudokuService
 
         return $valid;
     }
+
+    /* Given a board try the resolve by brute-force  */
+    private function backtrackBased(array $board): array|bool
+    {
+        for ($rowPosition = 0; $rowPosition < 9; $rowPosition++) {
+            for ($columnPosition = 0; $columnPosition < 9; $columnPosition++) {
+                // Process each incomplete cell
+                if ($board[$rowPosition][$columnPosition] == 0) {
+
+                    //Fill imcomplete cell with the correct value or possible values
+                    $board  = $this->completeCell($board, $rowPosition, $columnPosition);
+                    //Verify if is solved
+                    if ($this->isSolved($board)) return $board;
+
+                    // If exist a list of possibilities, iterate them and recurse
+                    $cell = $board[$rowPosition][$columnPosition];
+                    if (is_array($cell)) {
+                        for ($i = 0; $i < count($cell); $i++) {
+                            // Create a temporary board for each recursion. 
+                            $boardCopy = $board;
+                            // Choose a value
+                            $boardCopy[$rowPosition][$columnPosition] = $cell[$i];
+                            // Recurse again using new board
+                            if ($completedBoard = $this->backtrackBased($boardCopy)) {
+                                return $completedBoard;
+                            }
+                        }
+
+                        //Can't resolve, dead end.
+                        return false;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
