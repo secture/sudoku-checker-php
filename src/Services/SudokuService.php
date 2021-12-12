@@ -75,7 +75,7 @@ final class SudokuService
         $expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         sort($usedValues);
 
-        return ($expected === $usedValues) ? 'true' : 'false';
+        return ($expected === $usedValues) ? true : false;
     }
 
     private function isSolved(array $board): bool
