@@ -53,7 +53,7 @@ final class SudokuService
     private function completeCell(array $board, int $rowPosition, int $columnPosition): array
     {
         /* Retrive all the values used on the row, column and square in base one cell */
-        $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
+        $usedValues = [...$this->getRow($board, $rowPosition), ...$this->getColumn($board, $columnPosition), ...$this->getSquare($board, $this->squareCoordinates[$rowPosition][$columnPosition])];
 
         /* Create an array with the possible values for the cell*/
         $possibilitiesValues = [];
