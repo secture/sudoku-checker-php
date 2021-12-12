@@ -2,7 +2,7 @@
 
 namespace Secture\Service;
 
-class SudokuService
+final class SudokuService
 {
     /* Define the diferents square positions */
     private array $squareCoordinates = [
