@@ -17,13 +17,13 @@ final class SudokuService
         [7, 7, 7, 8, 8, 8, 9, 9, 9]
     ];
 
-    private function getRow(array $board, int $rowPosition)
+    private function getRow(array $board, int $rowPosition): array
     {
         return $board[$rowPosition];
     }
 
     /* Given a board and column position, we iterate the rows to return a column */
-    private function getColumn(array $board, int $columnPosition)
+    private function getColumn(array $board, int $columnPosition): array
     {
 
         $columnCells = [];
@@ -35,7 +35,7 @@ final class SudokuService
     }
 
     /* Given a board and square position, we iterate the row and colums to return the cells of the square */
-    private function getSquare(array $board, int $squarePosition)
+    private function getSquare(array $board, int $squarePosition): array
     {
         $cellsOfSquare = [];
         for ($row = 0; $row < 9; $row++) {
@@ -50,7 +50,7 @@ final class SudokuService
     }
 
     /* Fill the cell with the possiblities values or the correct value */
-    private function completeCell(array $board, int $rowPosition, int $columnPosition)
+    private function completeCell(array $board, int $rowPosition, int $columnPosition): array
     {
         /* Retrive all the values used on the row, column and square in base one cell */
         $usedValues = [$this->getRow($board, $rowPosition), $this->getColumn($board, $columnPosition), $this->getSquare($board, $this->square_coordinates[$rowPosition][$columnPosition])];
@@ -77,7 +77,7 @@ final class SudokuService
     }
 
     /* Given an array of used values in row/column/square check if the is correct complete */
-    private function checkSection(array $usedValues)
+    private function checkSection(array $usedValues): bool
     {
         $expected = [1, 2, 3, 4, 5, 6, 7, 8, 9];
         sort($usedValues);
@@ -85,7 +85,7 @@ final class SudokuService
         return ($expected === $usedValues) ? 'true' : 'false';
     }
 
-    private function isSolved(array $board)
+    private function isSolved(array $board): bool
     {
         $valid = true;
 
