@@ -1,6 +1,6 @@
 <?php
 
-namespace Secture\Service;
+namespace Secture\Sudoku;
 
 final class SudokuService
 {
