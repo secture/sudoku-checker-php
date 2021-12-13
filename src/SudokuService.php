@@ -82,6 +82,34 @@ final class SudokuService
         return ($expected === $usedValues) ? true : false;
     }
 
+    /* Recibe board by reference and check if the cell only have one possible value */
+    private function fillCellWithOnePossibleValue(&$board, $possibilities, $segment, $rowPosition, $columnPosition)
+    {
+        $updated = false;
+        for ($i = 0; $i < count($possibilities); $i++) {
+            $possibility = $possibilities[$i];
+            $counter = 0;
+            foreach ($segment as $cell) {
+                if (is_array($cell)) {
+                    if (in_array($possibility, $cell)) {
+                        $counter++;
+                    }
+                } else {
+                    if ($cell == $possibility) {
+                        $counter++;
+                    }
+                }
+            }
+            if ($counter == 1) {
+                $board[$rowPosition][$columnPosition] = $possibility;
+                $updated = true;
+                break;
+            }
+        }
+        
+        return $updated;
+    }
+
     private function isSolved(array $board): bool
     {
         $valid = true;
