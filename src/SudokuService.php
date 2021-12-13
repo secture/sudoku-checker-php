@@ -83,7 +83,7 @@ final class SudokuService
     }
 
     /* Recibe board by reference and check if the cell only have one possible value */
-    private function fillCellWithOnePossibleValue(&$board, $possibilities, $segment, $rowPosition, $columnPosition)
+    private function fillCellWithOnePossibleValue(&$board, $possibilities, $segment, $rowPosition, $columnPosition): bool
     {
         $updated = false;
         for ($i = 0; $i < count($possibilities); $i++) {
@@ -106,7 +106,7 @@ final class SudokuService
                 break;
             }
         }
-        
+
         return $updated;
     }
 
