@@ -234,10 +234,24 @@ final class SudokuService
         return $template;
     }
 
-    public function resolve(array $board): array
+    public function resolve(array $board): bool|array
     {
-        $board = $this->backtrackBased($board);
-        $this->isSolved($board);
+        $updated = true;
+        $solved = false;
+
+        /* First try to resolve the non-complex cells */
+        while ($updated && !$solved) {
+            $updated = $this->oneValueCellConstraint($board);
+            //Check if update
+            $solved = $this->isSolved($board);
+        }
+
+        // Brute force to finish off.  
+        if (!$solved) {
+            $board = $this->backtrackBased($board);
+            if ($board == false) return false;
+            $this->isSolved($board);
+        }
 
         return $board;
     }
