@@ -9,6 +9,6 @@ use Secture\Sudoku\SudokuGenerator;
 $sudokuGeneratorInstance = new sudokuGenerator(1);
 $sudoku  = $sudokuGeneratorInstance->puzzle();
 
+/* Here we resolve the sudoku if have solution */
 $checker = new SudokuChecker();
-
-$checker->check();
+$checker->check($sudoku);
