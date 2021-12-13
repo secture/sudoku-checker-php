@@ -50,7 +50,7 @@ final class SudokuService
     }
 
     /* Fill the cell with the possiblities values or the correct value */
-    private function completeCell(array $board, int $rowPosition, int $columnPosition): array
+    private function completeCell(array &$board, int $rowPosition, int $columnPosition): bool
     {
         /* Retrive all the values used on the row, column and square in base one cell */
         $usedValues = [...$this->getRow($board, $rowPosition), ...$this->getColumn($board, $columnPosition), ...$this->getSquare($board, $this->squareCoordinates[$rowPosition][$columnPosition])];
@@ -109,7 +109,7 @@ final class SudokuService
                 if ($board[$rowPosition][$columnPosition] == 0) {
 
                     //Fill imcomplete cell with the correct value or possible values
-                    $board  = $this->completeCell($board, $rowPosition, $columnPosition);
+                    $this->completeCell($board, $rowPosition, $columnPosition);
                     //Verify if is solved
                     if ($this->isSolved($board)) return $board;
 
