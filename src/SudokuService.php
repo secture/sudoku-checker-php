@@ -207,27 +207,29 @@ final class SudokuService
         return false;
     }
 
-    private function printCell(mixed $value)
-    {
-        //If cell is not resolve return a dot.
-        if (is_array($value) | $value == 0) return ".";
-
-        return $value;
-    }
-
     public function printBoard(array $board): string
     {
-        $template = "";
+        $template = "<table style='border-collapse:collapse;border-spacing:0;border:3px solid #000;'>";
+
         for ($i = 0; $i < 9; $i++) {
-            $rowCells = $this->getRow($board, $i);
-            if ($i % 3 == 0) $template .= "|=======|=======|=======|<br>";
-            $template .= "|" .
-                $this->printCell($rowCells[0]) . $this->printCell($rowCells[1]) .  $this->printCell($rowCells[2]) .  "|" .
-                $this->printCell($rowCells[3]) . $this->printCell($rowCells[4]) .  $this->printCell($rowCells[5]) .  "|" .
-                $this->printCell($rowCells[6]) . $this->printCell($rowCells[7]) .  $this->printCell($rowCells[8]) . "|<br>";
+            if ($i == 2 || $i == 5) {
+                $tableStyleSeparator = 'style="border-bottom:3px solid #000;"';
+            } else {
+                $tableStyleSeparator = '';
+            }
+            $template .= "<tr $tableStyleSeparator>";
+            for ($j = 0; $j < 9; $j++) {
+                if ($j == 2 || $j == 5) {
+                    $tableRightSeparator = 'border-right:3px solid #000;';
+                } else {
+                    $tableRightSeparator = '';
+                }
+                $template .= "<td style='width:40px;height:40px;text-align:center;border:1px solid #000;font-size: 30px;$tableRightSeparator'>" . $board[$i][$j] . "</td>";
+            }
+            $template .= "</tr>";
         }
 
-        $template .= "|=======|=======|=======|<br>";
+        $template .= "</table>";
 
         return $template;
     }
