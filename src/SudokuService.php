@@ -110,6 +110,44 @@ final class SudokuService
         return $updated;
     }
 
+    /* Recive board by reference, try to complete and check if one exits one possible value */
+    function oneValueCellConstraint(&$board): bool
+    {
+        $updated = false;
+
+        // Convert every cell into an array of $possibilities
+        for ($rowPosition = 0; $rowPosition < 9; $r++) {
+            for ($columnPosition = 0; $columnPosition < 9; $c++) {
+                if ($board[$r][$c] == 0) {
+                    $updated = $this->completeCell($board, $r, $c) || $updated;
+                }
+            }
+        }
+
+        // Check for any possibility appear once-only in the row, column, or quadrant. If it does, fill it in.
+        for ($rowPosition = 0; $rowPosition < 9; $r++) {
+            for ($columnPosition = 0; $columnPosition < 9; $c++) {
+                if (is_array($board[$r][$c])) {
+                    $possibilities = $board[$r][$c];
+                    $updated = $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getRow($board, $r), $r, $c) ||
+                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getColumn($board, $c), $r, $c) ||
+                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getSquare($board, $this->squareCoordinates[$r][$c]), $r, $c) || $updated;
+                }
+            }
+        }
+
+        // Reinitialize cells back to zero before ending
+        for ($rowPosition = 0; $rowPosition < 9; $rowPosition++) {
+            for ($columnPosition = 0; $columnPosition < 9; $columnPosition++) {
+                if (is_array($board[$r][$c])) {
+                    $board[$r][$c] = 0;
+                }
+            }
+        }
+
+        return $updated;
+    }
+
     private function isSolved(array $board): bool
     {
         $valid = true;
