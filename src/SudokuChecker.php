@@ -5,16 +5,16 @@ declare(strict_types=1);
 namespace Secture\Sudoku;
 
 
-use Secture\Sudoku\SudokuService;
+use Secture\Sudoku\SudokuResolver;
 
 final class SudokuChecker
 {
     public function check($board)
     {
-        $sudokuServiceInstance = new SudokuService();
+        $SudokuResolverInstance = new SudokuResolver();
 
-        $sudokuOriginalBoard = $sudokuServiceInstance->printBoard($board);
-        $sudokuResolved = $sudokuServiceInstance->resolve($board);
+        $sudokuOriginalBoard = $SudokuResolverInstance->printBoard($board);
+        $sudokuResolved = $SudokuResolverInstance->resolve($board);
 
         echo $sudokuOriginalBoard;
         echo "<br>";
@@ -24,6 +24,6 @@ final class SudokuChecker
             return false;
         }
         
-        echo $sudokuServiceInstance->printBoard($sudokuResolved);
+        echo $SudokuResolverInstance->printBoard($sudokuResolved);
     }
 }
