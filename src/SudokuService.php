@@ -63,10 +63,14 @@ final class SudokuService
             }
         }
 
-        /*  If there is only one valid possibility, fill it in. Else fill it with all the possible values for the cell */
-        $board[$rowPosition][$columnPosition] = (count($possibilitiesValues) == 1) ? $possibilitiesValues[0] : $possibilitiesValues;
-        
-        return $board;
+        if (count($possibilitiesValues) == 1) {
+            // If there is only one valid possibility, fill it in
+            $board[$rowPosition][$columnPosition] = $possibilitiesValues[0];
+            return true;
+        } else {
+            $board[$rowPosition][$columnPosition] = $possibilitiesValues;
+            return false;
+        }
     }
 
     /* Given an array of used values in row/column/square check if the is correct complete */
