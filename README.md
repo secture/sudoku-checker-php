@@ -35,3 +35,19 @@ In this repo you have some interesting resources:
 Feel free to install new third-party dependencies if you need it, except (obviously) for that ones which perform sudoku validations ;)
 
 Happy coding!
+
+## Explication of resolver
+
+- `app.php` is the entrypoint.
+    - Here we generate the sudoku with SudokuGenerator
+    - Here we call SudokuChecker
+
+- `SudokuChecker` is the render point.
+    - Here render the sudoku board un-resolved
+    - Try to resolve the sudoku with SudokuResolver
+    - If the sudoku have a solution render it.
+
+- `SudokuGenerator` is the array sudoku generator
+    - This is taken from other repository but adapted to these necesities.
+
+- `SudokuResolver` this class was full resolved by my. Is all commented.
