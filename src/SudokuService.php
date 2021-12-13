@@ -116,22 +116,22 @@ final class SudokuService
         $updated = false;
 
         // Convert every cell into an array of $possibilities
-        for ($rowPosition = 0; $rowPosition < 9; $r++) {
-            for ($columnPosition = 0; $columnPosition < 9; $c++) {
-                if ($board[$r][$c] == 0) {
-                    $updated = $this->completeCell($board, $r, $c) || $updated;
+        for ($rowPosition = 0; $rowPosition < 9; $rowPosition++) {
+            for ($columnPosition = 0; $columnPosition < 9; $columnPosition++) {
+                if ($board[$rowPosition][$columnPosition] == 0) {
+                    $updated = $this->completeCell($board, $rowPosition, $columnPosition) || $updated;
                 }
             }
         }
 
         // Check for any possibility appear once-only in the row, column, or quadrant. If it does, fill it in.
-        for ($rowPosition = 0; $rowPosition < 9; $r++) {
-            for ($columnPosition = 0; $columnPosition < 9; $c++) {
-                if (is_array($board[$r][$c])) {
-                    $possibilities = $board[$r][$c];
-                    $updated = $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getRow($board, $r), $r, $c) ||
-                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getColumn($board, $c), $r, $c) ||
-                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getSquare($board, $this->squareCoordinates[$r][$c]), $r, $c) || $updated;
+        for ($rowPosition = 0; $rowPosition < 9; $rowPosition++) {
+            for ($columnPosition = 0; $columnPosition < 9; $columnPosition++) {
+                if (is_array($board[$rowPosition][$columnPosition])) {
+                    $possibilities = $board[$rowPosition][$columnPosition];
+                    $updated = $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getRow($board, $rowPosition), $rowPosition, $columnPosition) ||
+                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getColumn($board, $columnPosition), $rowPosition, $columnPosition) ||
+                        $this->fillCellWithOnePossibleValue($board, $possibilities, $this->getSquare($board, $this->squareCoordinates[$rowPosition][$columnPosition]), $rowPosition, $columnPosition) || $updated;
                 }
             }
         }
@@ -139,8 +139,8 @@ final class SudokuService
         // Reinitialize cells back to zero before ending
         for ($rowPosition = 0; $rowPosition < 9; $rowPosition++) {
             for ($columnPosition = 0; $columnPosition < 9; $columnPosition++) {
-                if (is_array($board[$r][$c])) {
-                    $board[$r][$c] = 0;
+                if (is_array($board[$rowPosition][$columnPosition])) {
+                    $board[$rowPosition][$columnPosition] = 0;
                 }
             }
         }
