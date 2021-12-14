@@ -38,13 +38,15 @@ Happy coding!
 
 ## Explication of resolver
 
+
 - `app.php` is the entrypoint.
-    - Here we generate the sudoku with SudokuGenerator
-    - Here we call SudokuChecker
+    - Each time we refresh the page a new sodoku will be generate.
+    - Here we generate the sudoku with SudokuGenerator.
+    - Here we call SudokuChecker.
 
 - `SudokuChecker` is the render point.
-    - Here render the sudoku board un-resolved
-    - Try to resolve the sudoku with SudokuResolver
+    - Here render the sudoku board un-resolved.
+    - Try to resolve the sudoku with SudokuResolver.
     - If the sudoku have a solution render it.
 
 - `SudokuGenerator` is the array sudoku generator
